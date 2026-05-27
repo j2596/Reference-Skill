@@ -1,0 +1,4 @@
+interface:
+  display_name: "CNKI Reference Writer"
+  short_description: "Find verified CNKI PDFs in Chrome and cite thesis text"
+  default_prompt: "Use $cnki-reference-writer to search CNKI in my logged-in Chrome, download PDF-only papers, screen them by full text, and insert verified citations into my thesis."

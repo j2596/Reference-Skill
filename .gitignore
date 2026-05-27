@@ -1,0 +1,18 @@
+# Local task outputs
+*.pdf
+*.doc
+*.docx
+*.caj
+*.csv
+
+# Python/runtime cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
