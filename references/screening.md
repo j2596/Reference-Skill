@@ -9,7 +9,7 @@ Download and read multiple candidate PDFs first, then select the papers that bes
 | Dimension | Prefer | Reject |
 |---|---|---|
 | Authenticity | Searchable on CNKI; detail page opens | Not found on CNKI or metadata mismatch |
-| PDF status | `PDF涓嬭浇` exists and PDF downloads successfully | No PDF, failed download, or only non-PDF formats |
+| PDF status | `PDF下载` exists and PDF downloads successfully | No PDF, failed download, or only non-PDF formats |
 | Full-text readability | PDF body is readable and evidence sentences can be extracted | Garbled, missing pages, or cannot parse |
 | Relevance | Directly supports a specific paper claim | Only title, abstract, or keywords look similar |
 | Technical specificity | Matches modules, methods, system structure, or implementation | Vague background with no support for concrete text |
