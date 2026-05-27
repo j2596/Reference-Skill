@@ -20,13 +20,27 @@
 
 ## 安装
 
-### 方式 1：使用 Codex skill-installer 安装
+### 方式 1：把项目网址发给 Codex 自动安装
+
+把下面这个项目网址发给 Codex，让它帮你安装这个 Skill：
+
+```text
+https://github.com/j2596/Reference-Skill
+```
+
+你可以直接对 Codex 说：
+
+```text
+请帮我安装这个 Skill：https://github.com/j2596/Reference-Skill
+```
+
+### 方式 2：使用 Codex skill-installer 手动安装
 
 ```powershell
 python "${HOME}\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo j2596/Reference-Skill --path . --name cnki-reference-writer
 ```
 
-### 方式 2：手动克隆到本地 skills 目录
+### 方式 3：手动克隆到本地 skills 目录
 
 ```powershell
 git clone https://github.com/j2596/Reference-Skill.git "${HOME}\.codex\skills\cnki-reference-writer"
@@ -124,4 +138,3 @@ python scripts/validate_cnki_reference_table.py path/to/知网参考文献整理
 - 遇到验证码、权限不足、付费提示或下载拦截时，需要用户手动处理。
 - 没有 PDF、PDF 下载失败、PDF 不可读或仅有非 PDF 资源的文献不能进入最终参考文献表。
 - 本 Skill 只定义流程、约束和校验脚本，不提供知网账号、下载权限或权限绕过能力。
-
