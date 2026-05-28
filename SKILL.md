@@ -21,7 +21,7 @@ Before controlling Chrome or downloading from CNKI, confirm:
 ## Non-Negotiable Rules
 
 - Use the user's Chrome session for CNKI because login state, institution access, and download permission live there.
-- When the `chrome:Chrome` skill is available, use its Node REPL bootstrap path first: load the Chrome plugin `scripts/browser-client.mjs`, call `setupBrowserRuntime({ globals: globalThis })`, then use `agent.browsers.get("extension")`. Do not assume Chrome is unavailable just because no dedicated Chrome tool appears in tool search.
+- When the `chrome:Chrome` skill is available, use its Node REPL bootstrap path first: load the Chrome plugin `scripts/browser-client.mjs`, call `setupBrowserRuntime({ globals: globalThis })`, then use `agent.browsers.get("extension")`. If tool discovery returns no Chrome tool, search the local plugin cache for `openai-bundled/chrome/*/scripts/browser-client.mjs` before concluding Chrome cannot be controlled.
 - Final citation evidence must come from PDF full text only.
 - Do not use CNKI abstracts, keywords, titles, search snippets, HTML reading pages, reference lists, or AI summaries as final evidence.
 - Download PDFs only from the article detail page selector `a#pdfDown[name="pdfDown"]`.
@@ -54,7 +54,7 @@ Load these files only when their details are needed:
 | File | Use when |
 |---|---|
 | `references/workflow.md` | Need the full process for no-reference, insufficient-reference, or existing-reference scenarios. |
-| `references/cnki-chrome.md` | Need Chrome/CNKI selectors, Chrome bootstrap behavior, quote dialog behavior, PDF download fallback behavior, filter selectors, or pause conditions. |
+| `references/cnki-chrome.md` | Need Chrome/CNKI selectors, Chrome plugin path fallback, quote dialog behavior, normal-click PDF download order, download fallback behavior, filter selectors, or pause conditions. |
 | `references/screening.md` | Need screening criteria, quality filters, rejection reasons, or PDF evidence sentence rules. |
 | `references/docx-citation.md` | Need body citation placement, evidence-aligned rewriting, numbering, bibliography rebuild, saving, or formatting rules. |
 | `references/templates.md` | Need templates for `知网参考文献整理.md`, `引用对应核验说明.md`, or final summaries. |

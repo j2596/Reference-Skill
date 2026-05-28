@@ -73,10 +73,11 @@ Citation entry:
 
 PDF download:
 
-- Click only `a#pdfDown[name="pdfDown"]`.
-- The visible text is usually `PDF下载`.
-- Prefer `a#pdfDown[name="pdfDown"]:visible`.
-- If the normal browser download event times out, use the Chrome skill `downloadMedia()` fallback on the visible PDF link and then check the user's Downloads folder.
+- Before clicking, record the newest `.pdf` and `.crdownload` files in the user's Downloads folder.
+- Click only the visible selector `a#pdfDown[name="pdfDown"]:visible`.
+- Wait 5-15 seconds, then check the user's Downloads folder for a new `.pdf` file or active `.crdownload`.
+- If a new PDF appears, move or copy it into the task PDF folder with a traceable filename.
+- Use `downloadMedia()` only as a last fallback; it may trigger `docdown.cnki.net` / `ERR_BLOCKED_BY_CLIENT`.
 - Do not click any non-PDF download entry.
 - Do not click recommendation, advertisement, or unrelated PDF links.
 

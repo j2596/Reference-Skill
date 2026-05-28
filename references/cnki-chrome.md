@@ -11,6 +11,33 @@ On Codex Desktop, the Chrome skill is reached through the Node REPL browser-clie
 3. Get the browser with `agent.browsers.get("extension")`.
 4. List or claim tabs with `browser.user.openTabs()` and `browser.user.claimTab(tabInfo)`.
 
+### Chrome Bootstrap Fallback
+
+If `tool_search` does not expose `chrome:Chrome`, `@chrome`, or `browser-client`, do not stop.
+
+First search the local plugin cache for:
+
+`openai-bundled/chrome/*/scripts/browser-client.mjs`
+
+On Windows, typical path:
+
+`C:\Users\<USER>\.codex\plugins\cache\openai-bundled\chrome\<version>\scripts\browser-client.mjs`
+
+Then bootstrap Chrome through Node REPL:
+
+```js
+const pluginRoot = "C:/Users/<USER>/.codex/plugins/cache/openai-bundled/chrome/<version>";
+const { setupBrowserRuntime } = await import(pluginRoot + "/scripts/browser-client.mjs");
+await setupBrowserRuntime({ globals: globalThis });
+globalThis.browser = await agent.browsers.get("extension");
+```
+
+After setup, verify connection with:
+
+```js
+await browser.user.openTabs();
+```
+
 ## Confirm Before Use
 
 Before controlling Chrome, confirm:
@@ -53,14 +80,11 @@ On a CNKI article detail page such as `https://kns.cnki.net/kcms2/article/abstra
    - Close the quote dialog before any download attempt. The `.quote-pop` dialog can cover the PDF button and make clicks appear to do nothing. Try visible close controls such as `.quote-pop .close`, `.layui-layer-close`, or press `Escape`, then verify `.quote-pop` is no longer visible.
 
 2. Download the PDF:
-   - Click only `a#pdfDown[name="pdfDown"]`.
+   - Follow the PDF Download Order below.
+   - Click only the visible article-detail selector `a#pdfDown[name="pdfDown"]:visible`.
    - The link often has `onclick="WriteKrsDownLog()"` and visible text `PDF下载`.
    - Observed link shape: `https://bar.cnki.net/bar/download/order?...`.
-   - Prefer the visible link: `a#pdfDown[name="pdfDown"]:visible`.
-   - First try the normal browser download event if supported.
-   - If `waitForEvent("download")` times out but the visible PDF link exists, use the Chrome skill locator media download fallback: `locator('a#pdfDown[name="pdfDown"]:visible').first().downloadMedia({ timeoutMs: 60000 })`.
-   - After using `downloadMedia()`, check the user's default Downloads folder for new PDFs, then move completed files into the task PDF folder.
-   - Move/save the PDF into the task PDF folder.
+   - Move/save completed PDFs into the task PDF folder.
 
 3. Forbidden:
    - Do not use any non-PDF download entry.
@@ -81,7 +105,25 @@ Pause and explain if any of these occur:
 - Only non-PDF download entries exist.
 - The PDF opens but cannot be saved.
 
+Do not conclude that CNKI download is blocked only because `downloadMedia()` fails. First verify whether normal clicking `a#pdfDown[name="pdfDown"]` creates a PDF in the user's Downloads folder.
+
 Do not bypass permission controls or ask for passwords. Ask the user to handle visible Chrome issues manually, then continue after confirmation.
+
+## PDF Download Order
+
+Use normal Chrome click first.
+
+1. Before clicking, record the newest `.pdf` and `.crdownload` files in the user's Downloads folder.
+2. On the CNKI article detail page, click only the visible selector:
+
+   `a#pdfDown[name="pdfDown"]:visible`
+
+3. Wait 5-15 seconds.
+4. Check the user's Downloads folder for a new `.pdf` file or active `.crdownload`.
+5. If a new PDF appears, move or copy it into the task PDF folder with a traceable filename.
+6. If only `.crdownload` appears, wait until it completes or report an incomplete download.
+7. If no new file appears, then try browser `waitForEvent("download")` or other supported fallback.
+8. Use `downloadMedia()` only as a last fallback. It may navigate to `docdown.cnki.net` and trigger `ERR_BLOCKED_BY_CLIENT`, so do not treat its failure as proof that normal Chrome downloading is blocked.
 
 ## Download File Management
 
