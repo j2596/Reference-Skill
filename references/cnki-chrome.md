@@ -2,6 +2,15 @@
 
 Use the `@chrome` plugin because the user's CNKI login state, cookies, institution access, and download permission live in their Chrome profile.
 
+## Chrome Connection
+
+On Codex Desktop, the Chrome skill is reached through the Node REPL browser-client bootstrap, not a separate visible Chrome tool. If no dedicated Chrome tool appears in tool search, do not conclude Chrome cannot be controlled. Read and follow the `chrome:Chrome` skill bootstrap:
+
+1. Import the Chrome plugin `scripts/browser-client.mjs` with an absolute path.
+2. Run `setupBrowserRuntime({ globals: globalThis })`.
+3. Get the browser with `agent.browsers.get("extension")`.
+4. List or claim tabs with `browser.user.openTabs()` and `browser.user.claimTab(tabInfo)`.
+
 ## Confirm Before Use
 
 Before controlling Chrome, confirm:
@@ -39,14 +48,17 @@ On a CNKI article detail page such as `https://kns.cnki.net/kcms2/article/abstra
    - Click `li.btn-quote[title="引用"]`.
    - Use GB/T 7714-2025.
    - Observed behavior: the detail page opens a `.quote-pop` quote dialog. GB/T 7714-2025 is in the first row, and the citation text is in `.quote-pop tr:first-child textarea.text`.
-   - Example format: `[1]路锐,范善斌,张庆华,等.基于多传感器融合的变电站开关柜智能搬运小车研究[J].物联网技术,2026,16(7):104-108.DOI:10.16667/j.issn.2095-1302.2026.07.024.`
    - Write the citation into the tracking table and final bibliography.
+   - Close the quote dialog before any download attempt. The `.quote-pop` dialog can cover the PDF button and make clicks appear to do nothing. Try visible close controls such as `.quote-pop .close`, `.layui-layer-close`, or press `Escape`, then verify `.quote-pop` is no longer visible.
 
 2. Download the PDF:
    - Click only `a#pdfDown[name="pdfDown"]`.
    - The link often has `onclick="WriteKrsDownLog()"` and visible text `PDF下载`.
    - Observed link shape: `https://bar.cnki.net/bar/download/order?...`.
-   - Wait for the download to complete.
+   - Prefer the visible link: `a#pdfDown[name="pdfDown"]:visible`.
+   - First try the normal browser download event if supported.
+   - If `waitForEvent("download")` times out but the visible PDF link exists, use the Chrome skill locator media download fallback: `locator('a#pdfDown[name="pdfDown"]:visible').first().downloadMedia({ timeoutMs: 60000 })`.
+   - After using `downloadMedia()`, check the user's default Downloads folder for new PDFs, then move completed files into the task PDF folder.
    - Move/save the PDF into the task PDF folder.
 
 3. Forbidden:

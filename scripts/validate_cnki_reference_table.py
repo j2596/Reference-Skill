@@ -69,11 +69,14 @@ def main() -> int:
         read_status = row.get("PDF阅读状态", "")
         pdf_path = row.get("本地PDF路径", "").strip("` ")
         evidence = row.get("适合引用的PDF原文完整句子", "")
+        location = row.get("对应论文位置", "")
 
         if status == "已下载" and pdf_path and not Path(pdf_path).exists():
             errors.append(f"row {idx}: PDF path does not exist: {pdf_path}")
         if status == "已下载" and read_status == "已阅读全文" and not evidence:
             errors.append(f"row {idx}: verified PDF row has no evidence sentence")
+        if status == "已下载" and read_status == "已阅读全文" and not location:
+            errors.append(f"row {idx}: verified PDF row has no paper location")
         if status != "已下载" and read_status == "已阅读全文":
             warnings.append(f"row {idx}: read status says 已阅读全文 but download status is {status}")
 

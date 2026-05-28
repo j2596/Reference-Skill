@@ -3,7 +3,7 @@
 ## Before Editing
 
 1. Extract the full DOCX text, headings, and paragraph order.
-2. Record paragraph indexes or stable text snippets for citation insertion points.
+2. Record paragraph indexes, stable text snippets, and the nearest chapter/section heading for citation insertion points.
 3. Check whether body citation numbers already exist.
 4. Check whether a bibliography already exists.
 5. If references already exist, complete CNKI authenticity checks and PDF full-text verification first.
@@ -14,9 +14,23 @@
 - Default to at most one citation number per paragraph.
 - Place the citation number near the specific supported claim.
 - Avoid citation piles such as `[1][2][3]`.
-- Rewrite the original sentence when needed so the paper's argument and PDF evidence fit naturally.
+- Rewrite the original sentence or add concise nearby content when needed so the paper's argument and PDF evidence fit naturally.
+- Do not add a citation to a sentence merely because the topic is similar. The final cited sentence must make a claim that is directly supported by the PDF evidence sentence.
+- If the original paragraph is too generic, revise it to include the concrete design, method, protocol, result, or limitation supported by the PDF.
 - Avoid repetitive wording like "X et al. pointed out"; use concise academic phrasing when the user wants natural writing.
 - Do not paste long PDF original text into the body. Keep original PDF evidence sentences in the verification notes.
+
+## Evidence Alignment
+
+For every final citation, record this mapping before saving:
+
+1. Chapter/section location, such as `第2章 系统设计 / 2.3 通信模块设计`.
+2. Original paper sentence or paragraph snippet.
+3. Revised final sentence with the citation number.
+4. PDF evidence sentence.
+5. Why the revised sentence is supported by the evidence.
+
+If the original text already perfectly matches the PDF evidence, note that no rewrite was needed. Otherwise, make the smallest useful rewrite that creates a real evidence-to-claim match.
 
 ## Bibliography
 

@@ -22,7 +22,7 @@ Confirm these items before starting:
 3. Generate CNKI search terms.
 4. Download more candidate PDFs than the target reference count.
 5. Read, screen, and order references.
-6. Insert citations and rebuild the bibliography by first appearance.
+6. Rewrite or add body text where needed, then insert citations and rebuild the bibliography by first appearance.
 
 ### Insufficient references
 
@@ -68,11 +68,14 @@ Citation entry:
 - Click `li.btn-quote[title="引用"]`.
 - Copy the GB/T 7714-2025 entry.
 - Use this entry as the preferred source for the tracking table and final bibliography.
+- Close the `.quote-pop` citation dialog before clicking the PDF download button.
 
 PDF download:
 
 - Click only `a#pdfDown[name="pdfDown"]`.
 - The visible text is usually `PDF下载`.
+- Prefer `a#pdfDown[name="pdfDown"]:visible`.
+- If the normal browser download event times out, use the Chrome skill `downloadMedia()` fallback on the visible PDF link and then check the user's Downloads folder.
 - Do not click any non-PDF download entry.
 - Do not click recommendation, advertisement, or unrelated PDF links.
 
@@ -86,7 +89,7 @@ For every downloaded PDF:
 2. Extract body text.
 3. Read the full text or enough complete body sections to evaluate the paper.
 4. Extract a complete sentence that truly exists in the PDF.
-5. Map it to the specific paper paragraph or claim it supports.
+5. Map it to the specific paper chapter/section, paragraph, and claim it supports.
 6. Explain why it supports that claim.
 
 Do not use abstracts, keywords, titles, search snippets, reference lists, or AI summaries as citation evidence.
@@ -98,6 +101,8 @@ Do not use abstracts, keywords, titles, search snippets, reference lists, or AI 
 - Default to at most one citation per paragraph.
 - Avoid citation piles.
 - Rewrite nearby body text when needed so the citation is natural and evidence-based.
+- Do not leave the body unchanged if the chosen PDF only supports a more specific or different claim. Make the smallest useful rewrite or addition so the final cited sentence is genuinely supported by the PDF evidence.
+- Record the nearest chapter/section heading for every citation in `引用对应核验说明.md`; if the paper has no headings, record a stable paragraph location.
 - Rebuild the bibliography.
 - Save as a new Word file rather than overwriting the original.
 
