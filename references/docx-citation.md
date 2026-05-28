@@ -34,7 +34,7 @@ If the original text already perfectly matches the PDF evidence, note that no re
 
 ## Bibliography
 
-The final bibliography must contain only PDF-verified references. Prefer GB/T 7714-2025 entries exported from CNKI's `li.btn-quote[title="引用"]` button.
+The final bibliography must contain only PDF-verified references. Prefer GB/T 7714-2025 entries exported from CNKI's `li.btn-quote[title="引用"]` button, then remove `DOI:` and everything after it before insertion.
 
 Rules:
 
@@ -43,7 +43,8 @@ Rules:
 3. Each paper appears only once.
 4. Remove references not cited in the body unless the user asks to keep them.
 5. Remove papers that were not downloaded as PDFs, were not read as full text, only offered non-PDF formats, failed to download, or could not be found on CNKI.
-6. If the user provides a school template, follow it. Otherwise, prioritize content correctness over typography.
+6. Final bibliography entries must not contain `DOI:` or DOI values.
+7. If the user provides a school template, follow it. Otherwise, prioritize content correctness over typography.
 
 ## Saving
 

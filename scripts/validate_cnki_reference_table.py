@@ -61,6 +61,8 @@ def main() -> int:
     seen_refs: set[str] = set()
     for idx, row in enumerate(rows, start=1):
         ref = row.get("参考文献条目(GB/T 7714-2025)", "")
+        if re.search(r"\bdoi\s*:", ref, flags=re.IGNORECASE):
+            errors.append(f"row {idx}: reference entry must remove DOI and following content")
         if ref in seen_refs:
             warnings.append(f"row {idx}: duplicate reference entry")
         seen_refs.add(ref)

@@ -27,6 +27,7 @@ Before controlling Chrome or downloading from CNKI, confirm:
 - Download PDFs only from the article detail page selector `a#pdfDown[name="pdfDown"]`.
 - If the detail page has no PDF download entry, or only offers non-PDF entries, skip the paper and record the reason.
 - Use CNKI's quote button `li.btn-quote[title="引用"]` to obtain GB/T 7714-2025 citation entries when available.
+- Before writing CNKI citation entries into the paper, bibliography, tracking table, or verification notes, remove `DOI:` and everything after it. Example: `[1]程翔,许正荣,张昆明.基于物联网的智能家居控制系统设计[J].传感器与微系统,2021,40(3):106-108+111.DOI:...` becomes `[1]程翔,许正荣,张昆明.基于物联网的智能家居控制系统设计[J].传感器与微系统,2021,40(3):106-108+111.`
 - Use CNKI search filters in `#ModuleGroupFilter` when quality, year, source, document type, or subject constraints are required.
 - Do not cite weakly related papers just to reach a target count.
 - Do not replace user-specified references without explaining why and getting confirmation, unless the user already authorized replacement.

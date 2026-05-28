@@ -67,7 +67,8 @@ Citation entry:
 
 - Click `li.btn-quote[title="引用"]`.
 - Copy the GB/T 7714-2025 entry.
-- Use this entry as the preferred source for the tracking table and final bibliography.
+- Remove `DOI:` and everything after it.
+- Use the cleaned entry as the preferred source for the tracking table and final bibliography.
 - Close the `.quote-pop` citation dialog before clicking the PDF download button.
 
 PDF download:

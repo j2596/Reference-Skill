@@ -13,6 +13,8 @@ Recommended status values:
 - PDF下载状态: `已下载`, `无PDF`, `下载失败`, `权限不足`, `非PDF跳过`.
 - PDF阅读状态: `已阅读全文`, `无法解析`, `缺页`, `未完成`, `不建议使用`.
 
+`参考文献条目(GB/T 7714-2025)` must be the cleaned final entry used in the Word bibliography. Remove `DOI:` and everything after it.
+
 Rows may include rejected papers. Clearly distinguish final cited references from rejected candidates in `备注`.
 
 ## `引用对应核验说明.md`
@@ -28,7 +30,7 @@ Use this entry format:
 * 原文片段: 修改前的论文句子或段落摘录；如果原文已经完全契合证据，写“未修改，原文已契合证据”。
 * 修改后论文句子: 插入正文中的最终句子，包含引用编号。
 * PDF证据句: 来自PDF正文、图表注释、方法、设计、测试或结论部分的完整句子。
-* CNKI引用条目: 从知网引用按钮获取的GB/T 7714-2025条目。
+* CNKI引用条目: 从知网引用按钮获取并已去除DOI部分的GB/T 7714-2025条目。
 * 本地PDF: PDF全文文件路径。
 * 知网详情页: CNKI文章详情页URL。
 * 支撑关系说明: 说明PDF证据如何支撑修改后的论文句子。

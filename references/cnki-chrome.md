@@ -48,7 +48,8 @@ On a CNKI article detail page such as `https://kns.cnki.net/kcms2/article/abstra
    - Click `li.btn-quote[title="引用"]`.
    - Use GB/T 7714-2025.
    - Observed behavior: the detail page opens a `.quote-pop` quote dialog. GB/T 7714-2025 is in the first row, and the citation text is in `.quote-pop tr:first-child textarea.text`.
-   - Write the citation into the tracking table and final bibliography.
+   - Remove `DOI:` and everything after it before writing the citation into the tracking table, verification notes, or final bibliography.
+   - Write the cleaned citation into the tracking table and final bibliography.
    - Close the quote dialog before any download attempt. The `.quote-pop` dialog can cover the PDF button and make clicks appear to do nothing. Try visible close controls such as `.quote-pop .close`, `.layui-layer-close`, or press `Escape`, then verify `.quote-pop` is no longer visible.
 
 2. Download the PDF:
